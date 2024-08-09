@@ -43,16 +43,12 @@ Berikut adalah langkah-langkah untuk menginstal dan menjalankan proyek ini:
     composer install
     ```
 
-    ![Install Dependencies PHP]
-
 4. Install dependencies frontend menggunakan npm:
 
     ```bash
     npm install
     npm run build
     ```
-
-    ![Install Dependencies Frontend]
 
 5. Salin file `.env.example` menjadi `.env`:
 
