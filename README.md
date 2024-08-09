@@ -82,4 +82,6 @@ Berikut adalah langkah-langkah untuk menginstal dan menjalankan proyek ini:
 
 ## Cara Penggunaan
 
-Aplikasi ini sudah dilengkapi dengan autentikasi menggunakan Laravel UI dengan Bootstrap 5, serta manajemen izin dan peran menggunakan paket Spatie Permission. Untuk mengelola peran dan izin, Anda bisa menggunakan command artisan yang tersedia atau membuat fitur tambahan di aplikasi Anda.
+- Pastikan Seeder Sudah Run Lalu Berhasil
+- Untuk Melakukan Login Admin pada /login, email : ridhosaputs2nd@gmail.com dan password adalah admin
+- Untuk Melakukan Login User Biasa pada /login, email : ridhosaputs77@gmail.com dan password adalah user
