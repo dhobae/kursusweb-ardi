@@ -1,4 +1,4 @@
-# Kursus Web Ardi
+# Kursus Web Ardi Laravel 10
 
 ## Daftar Isi
 
