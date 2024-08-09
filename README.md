@@ -1,18 +1,25 @@
 # Kursus Web Ardi
 
-![](./ss_project/gambar1.png)
-![](./ss_project/gambar2.png)
-![](./ss_project/gambar3.png)
-![](./ss_project/gambar4.png)
-![](./ss_project/gambar5.png)
-![](./ss_project/gambar6.png)
-![](./ss_project/gambar7.png)
-![](./ss_project/gambar8.png)
-
-
 ## Daftar Isi
 
 -   [Instalasi](#instalasi)
+-   [Cara Penggunaan](#cara-penggunaan)
+
+![](./ss_project/gambar1.png)
+<br>
+![](./ss_project/gambar2.png)
+<br>
+![](./ss_project/gambar3.png)
+<br>
+![](./ss_project/gambar4.png)
+<br>
+![](./ss_project/gambar5.png)
+<br>
+![](./ss_project/gambar6.png)
+<br>
+![](./ss_project/gambar7.png)
+<br>
+![](./ss_project/gambar8.png)
 
 ## Instalasi
 
