@@ -21,7 +21,7 @@ Berikut adalah langkah-langkah untuk menginstal dan menjalankan proyek ini:
 1. Clone repositori ini ke direktori lokal Anda:
 
     ```bash
-    git clone https://github.com/username/repo-name.git
+    git clone https://github.com/r1dhosaputs/kursusweb-ardi.git
     ```
 
 2. Masuk ke direktori proyek:
