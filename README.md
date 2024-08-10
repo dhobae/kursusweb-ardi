@@ -47,7 +47,7 @@ Berikut adalah langkah-langkah untuk menginstal dan menjalankan proyek ini:
 
     ```bash
     npm install
-    npm run build
+    npm run dev / build
     ```
 
 5. Salin file `.env.example` menjadi `.env`:
