@@ -2,6 +2,14 @@
 
 @section('content')
     <div class="container">
+        <form action="{{ route('kursus') }}" method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Cari Judul Kursus..."
+                    value="{{ request()->get('search') }}">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
+        </form>
+
         @foreach ($data as $row)
             <div class="card mb-5">
                 <div class="card-header">

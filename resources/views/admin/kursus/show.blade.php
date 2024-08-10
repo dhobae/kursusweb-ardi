@@ -84,14 +84,21 @@
 
             <div class="row justify-content-center align-items-center mt-3">
                 <div class="col-12">
-                    <h4 class="card-tittle mb-0 d-block" style="font-weight: bold">
+                    <h4 class="card-title mb-0 d-block" style="font-weight: bold">
                         Isi Materi
                     </h4>
                 </div>
                 <div class="col-12">
+                    @if ($materis->isEmpty())
+                        <div class="alert alert-warning">
+                            Tidak ada materi yang tersedia. Silakan <a
+                                href="{{ route('materi-list', ['show_modal' => 'true']) }}"
+                                class="btn btn-sm btn-dark mx-2">Tambahkan</a> materi.
+                        </div>
+                    @endif
                     {{-- start accord --}}
                     <div id="accordion">
-                        @foreach ($data->materis as $materi)
+                        @foreach ($materis as $materi)
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h4 class="card-title w-100">
@@ -160,8 +167,32 @@
                         @endforeach
                     </div>
                     {{-- end accord --}}
+
+                    {{-- pagination --}}
+                    <ul class="pagination mb-0">
+                        <li class="page-item {{ $materis->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $materis->previousPageUrl() }}">Previous</a>
+                        </li>
+
+                        @php
+                            $currentPage = $materis->currentPage();
+                            $start = max($currentPage - 1, 1);
+                            $end = min($start + 3, $materis->lastPage());
+                        @endphp
+
+                        @for ($i = $start; $i <= $end; $i++)
+                            <li class="page-item {{ $i == $materis->currentPage() ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $materis->url($i) }}">{{ $i }}</a>
+                            </li>
+                        @endfor
+
+                        <li class="page-item {{ $materis->hasMorePages() ? '' : 'disabled' }}">
+                            <a class="page-link" href="{{ $materis->nextPageUrl() }}">Next</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
         </div>
     </div>
 

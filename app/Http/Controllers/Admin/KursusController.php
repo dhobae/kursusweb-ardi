@@ -10,57 +10,14 @@ use Illuminate\Support\Facades\Validator;
 
 class KursusController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data = Kursus::get();
-        return view('admin.kursus.index', compact('data'));
+
+        $show_modal = $request->has('show_modal') && $request->get('show_modal') == 'true';
+
+        return view('admin.kursus.index', compact('data', 'show_modal'));
     }
-
-    public function create()
-    {
-        //
-        // $validated = $request->validate([
-        //     'name' => 'required|string|max:255', // Nama harus diisi, hanya huruf dan spasi, maksimal 255 karakter
-        //     'email' => 'required|email|unique:users,email|max:255', // Email harus valid, unik, dan maksimal 255 karakter
-        //     'password' => 'required|string|min:8', // Password harus diisi, minimal 8 karakter
-        // ]);
-        //  'foto_kostum' => ['required', 'image', 'mimes:jpeg,jpg,png', 'max:2048'],
-    }
-
-    // public function store(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'judul_kursus' => 'required',
-    //         'deskripsi_kursus' => 'required',
-    //         'gambar_kursus' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-    //         'durasi_jam' => 'required|integer|min:0|max:24',
-    //         'durasi_menit' => 'required|integer|min:0|max:59',
-    //     ]);
-
-    //     // Menggabungkan jam dan menit menjadi durasi dalam menit
-    //     $durasi = ($request->durasi_jam * 60) + $request->durasi_menit;
-
-    //     // Validasi tambahan untuk memastikan durasi tidak 0
-    //     if ($durasi === 0) {
-
-    //         // return;
-    //     }
-
-    //     if ($request->hasFile('gambar_kursus')) {
-    //         $path = $request->file('gambar_kursus')->store('gambar_kursus');
-    //     } else {
-    //         $path = 'No Images';
-    //     }
-
-    //     Kursus::create([
-    //         'judul_kursus' => $validated['judul_kursus'],
-    //         'deskripsi_kursus' => $validated['deskripsi_kursus'],
-    //         'durasi_kursus' => $durasi, // Menyimpan durasi dalam menit
-    //         'gambar_kursus' => $path,
-    //     ]);
-
-    //     return 'berhasil';
-    // }
 
     public function store(Request $request)
     {
@@ -111,13 +68,16 @@ class KursusController extends Controller
         );
     }
 
-
     public function show(Kursus $kursus, string $id)
     {
+        $data = $kursus->findOrFail($id);
 
-        $data = $kursus->with('materis')->findOrFail($id);
-        return view('admin.kursus.show', compact('data'));
+        $materis = $data->materis()->paginate(5);
+
+        return view('admin.kursus.show', compact('data', 'materis'));
     }
+
+
 
     public function edit(Kursus $kursus, string $id)
     {
@@ -128,8 +88,6 @@ class KursusController extends Controller
 
     public function update(Request $request, Kursus $kursus, string $id)
     {
-        // return $request;
-
         $kursus = Kursus::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
@@ -164,7 +122,6 @@ class KursusController extends Controller
             $path = $kursus->gambar_kursus; // Tetap gunakan gambar lama jika tidak ada yang baru
         }
 
-        // Perbarui data kursus
         $kursus->update([
             'judul_kursus' => $request->input('judul_kursus'),
             'deskripsi_kursus' => $request->input('deskripsi_kursus'),
@@ -172,7 +129,6 @@ class KursusController extends Controller
             'gambar_kursus' => $path,
         ]);
 
-        // return 'berhasil diupdate';
         return back()->with(
             'notifikasi',
             [

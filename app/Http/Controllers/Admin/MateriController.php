@@ -12,12 +12,14 @@ class MateriController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = Materi::with('kursus')->get();
         $data_kursus = Kursus::get();
 
-        return view('admin.materi.index', compact('data', 'data_kursus'));
+        $show_modal = $request->has('show_modal') && $request->get('show_modal') == 'true';
+
+        return view('admin.materi.index', compact('data', 'data_kursus', 'show_modal'));
     }
 
     /**

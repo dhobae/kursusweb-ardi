@@ -61,7 +61,8 @@
                                             <td>
                                                 <div class="d-flex justify-content-center align-items-center"
                                                     style="gap: 3px">
-                                                    <a href="{{ route('kursus-show', $row->id) }}" class="btn btn-sm btn-info">
+                                                    <a href="{{ route('kursus-show', $row->id) }}"
+                                                        class="btn btn-sm btn-info">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                     <a href="{{ route('kursus-edit', $row->id) }}"
@@ -98,6 +99,7 @@
         @csrf
         <div class="modal fade" id="tambahKursus" data-backdrop="static" tabindex="-1" role="dialog"
             aria-labelledby="tambahKursusLabel" aria-hidden="true">
+
             <script>
                 $(document).ready(function() {
                     @if ($errors->any())
@@ -232,6 +234,19 @@
         </div>
     </form>
 
+
+    @if ($show_modal)
+        <script>
+            $(document).ready(function() {
+                $('#tambahKursus').modal('show');
+
+                // Menghapus parameter dari URL setelah modal ditampilkan
+                const url = new URL(window.location.href);
+                url.searchParams.delete('show_modal');
+                window.history.replaceState(null, null, url.toString());
+            });
+        </script>
+    @endif
 
     <script>
         $(document).ready(function() {

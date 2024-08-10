@@ -93,7 +93,7 @@
     <!-- Modal -->
     <form action="{{ route('materi-store') }}" method="POST">
         @csrf
-        <div class="modal fade" id="tambahMateri" tabindex="-1" role="dialog" aria-labelledby="tambahMateriLabel"
+        <div class="modal fade" id="tambahMateri" tabindex="-1" role="dialog" data-backdrop="static" tabindex="-1" aria-labelledby="tambahMateriLabel"
             aria-hidden="true">
             <script>
                 $(document).ready(function() {
@@ -131,7 +131,8 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group">
+
+                        {{-- <div class="form-group">
                             <label for="kursus_id">Pilih Kursus Tersedia
                                 <span class="text-danger">*</span>
                             </label>
@@ -144,7 +145,31 @@
                             @error('kursus_id')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="kursus_id">Pilih Kursus Tersedia
+                                <span class="text-danger">*</span>
+                            </label>
+                            @if ($data_kursus->isEmpty())
+                                <div class="alert alert-warning">
+                                    Tidak ada kursus yang tersedia. Silakan <a
+                                        href="{{ route('kursus-list', ['show_modal' => 'true']) }}"
+                                        class="btn btn-sm btn-dark mx-2">Tambahkan</a> kursus terlebih dahulu.
+                                </div>
+                            @else
+                                <select class="form-control" id="kursus_id" name="kursus_id">
+                                    <option value="">Pilih Kursus</option>
+                                    @foreach ($data_kursus as $kursus)
+                                        <option value="{{ $kursus->id }}">{{ $kursus->judul_kursus }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kursus_id')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            @endif
                         </div>
+
+
                         <div class="form-group">
                             <label for="link_embed_materi">Link Embed
                                 <span class="text-danger">*</span>
@@ -165,6 +190,18 @@
         </div>
     </form>
 
+
+    @if ($show_modal)
+        <script>
+            $(document).ready(function() {
+                $('#tambahMateri').modal('show');
+                // Menghapus parameter dari URL setelah modal ditampilkan
+                const url = new URL(window.location.href);
+                url.searchParams.delete('show_modal');
+                window.history.replaceState(null, null, url.toString());
+            });
+        </script>
+    @endif
 
     <script>
         $(document).ready(function() {
@@ -224,7 +261,7 @@
             $('.dataTables_paginate .pagination').css('margin-bottom', '0', '!important');
 
 
-           
+
 
         });
     </script>
